@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>SafeDriveVLA: Instruction-Conditioned World-Model Dreaming for Conflict-Aware End-to-End Autonomous Driving</title>
+        <title>SafeDriveVLA: Navigation-Conditioned World Model Dreaming for Conflict-Aware End-to-End Autonomous Driving</title>
 
         <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
         <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="SafeDriveVLA — instruction-conditioned world-model dreaming for conflict-aware end-to-end autonomous driving. Three-axis safety benchmark for VLAs (instruction following, instruction-scene conflict, malicious instruction).">
+        <meta name="description" content="SafeDriveVLA — navigation-conditioned world model dreaming for conflict-aware end-to-end autonomous driving. Three-axis safety benchmark for VLAs (navigation following, navigation-scene conflict, adversarial instruction).">
 
         <script src="./static/js/distill_template.v2.js"></script>
 
@@ -38,19 +38,21 @@
         <div class="header-wrapper" style="background: linear-gradient(220deg, #fde68a 0%, #b91c1cc0 40%, #1c1917 100%);">
 
             <div class="header-container" id="header-container">
-                <div class="header-content">
+                <div class="header-content" style="max-width:100%; margin-right:0;">
                 <h1 style="font-size:3.6rem;">
                   <span class="sdv-name"><span class="s1">S</span><span class="a1">a</span><span class="f">f</span><span class="e1">e</span><span class="d">D</span><span class="r">r</span><span class="i">i</span><span class="v1">v</span><span class="e2">e</span><span class="v2">V</span><span class="l">L</span><span class="a2">A</span></span>:
-                  Instruction-Conditioned World-Model Dreaming for Conflict-Aware End-to-End Autonomous Driving
+                  Navigation-Conditioned World Model Dreaming for Conflict-Aware End-to-End Autonomous Driving
                 </h1>
 
                 <h2 style="margin:1.2rem 0 1.6rem; font-size:1.05rem; line-height:1.55; color:#FFF7D4; font-weight:400; max-width:620px;">
                   <span style="display:flex; align-items:center; gap:0.4rem; margin-bottom:1.2rem; font-weight:600; font-size:1.4rem; color:#fff;">
                     SafeDriveVLA Team
                   </span>
-                  <span style="opacity:0.92;">Decoupling instruction&ndash;scene conflict reasoning from action generation through an interpretable categorical bottleneck, so VLA drivers can recognize when a user instruction is unsafe given the surrounding scene.</span>
+                  <span style="opacity:0.92;">Decoupling navigation&ndash;scene conflict reasoning from action generation through an interpretable conflict prediction, so VLA drivers can recognize when a navigation signal is unsafe given the surrounding scene.</span>
                 </h2>
 
+                <!-- Resource links (arXiv / PDF / GitHub / Data) hidden for anonymous submission. Restore after de-anonymization. -->
+                <!--
                 <div class="button-container">
                     <a href="#" class="button paper-link" target="_blank">
                         <span class="icon is-small">
@@ -73,10 +75,7 @@
                         </span><span>Data</span>
                     </a>
                 </div>
-                </div>
-                <div class="header-image">
-                    <!-- TODO: Replace with SafeDriveVLA teaser figure (figure/teaser.pdf rendered as PNG) -->
-                    <img src="assets/figures/teaser.png" alt="SafeDriveVLA Teaser" class="teaser-image" onerror="this.style.display='none'">
+                -->
                 </div>
             </div>
         </div>
@@ -111,12 +110,11 @@
                   </p>
 
                   <p class="wb-lead">
-                    We are the first to study <b>instruction&ndash;scene conflict</b> in the E2E VLA setting. We build a three-axis benchmark suite probing (i)&nbsp;safe instruction following, (ii)&nbsp;instruction&ndash;scene conflict awareness, and (iii)&nbsp;robustness to malicious instructions, and we propose <span class="sdv-name"><span class="s1">S</span><span class="a1">a</span><span class="f">f</span><span class="e1">e</span><span class="d">D</span><span class="r">r</span><span class="i">i</span><span class="v1">v</span><span class="e2">e</span><span class="v2">V</span><span class="l">L</span><span class="a2">A</span></span>, which decouples instruction&ndash;scene conflict reasoning from action generation through an interpretable categorical bottleneck predicted before the action span.
+                    We are the first to systematically study <b>navigation&ndash;scene conflict</b> in the E2E VLA setting. We build a three-axis benchmark suite probing (i)&nbsp;safe navigation following, (ii)&nbsp;navigation&ndash;scene conflict awareness, and (iii)&nbsp;robustness to adversarial instructions, and we propose <span class="sdv-name"><span class="s1">S</span><span class="a1">a</span><span class="f">f</span><span class="e1">e</span><span class="d">D</span><span class="r">r</span><span class="i">i</span><span class="v1">v</span><span class="e2">e</span><span class="v2">V</span><span class="l">L</span><span class="a2">A</span></span>, which decouples conflict reasoning from action generation through an interpretable conflict prediction made before the action span, together with navigation-conditioned world model dreaming that exposes whether the instructed maneuver is feasible before the policy commits.
                   </p>
 
                   <figure style="width: 100%; max-width: 1000px; display: block; margin: 24px auto;">
-                    <!-- TODO: Replace with rendered teaser figure -->
-                    <img src="assets/figures/teaser.png" alt="Instruction-scene conflict in end-to-end VLAs" onerror="this.outerHTML='&lt;div class=&quot;placeholder-box&quot;&gt;Teaser figure placeholder &mdash; drop assets/figures/teaser.png&lt;/div&gt;'">
+                    <img src="assets/figures/teaser.png" alt="Navigation-scene conflict in end-to-end VLAs" onerror="this.outerHTML='&lt;div class=&quot;placeholder-box&quot;&gt;Teaser figure placeholder &mdash; drop assets/figures/teaser.png&lt;/div&gt;'">
                   </figure>
                   <br>
                 </div>
@@ -139,32 +137,33 @@
 
                     <article class="sdv-axis-card">
                       <div class="sdv-axis-num">1</div>
-                      <h3>Instruction Following</h3>
+                      <h3>Navigation Following</h3>
                       <p>
-                        For each meta-action, a pool of paraphrased natural-language instructions is issued on routes synthesized from the CARLA OpenDRIVE topology, with all hazards removed and all lights forced green &mdash; isolating whether the model can actually condition on language at all.
+                        For each meta-command, a pool of paraphrased natural-language instructions is issued on routes synthesized from the CARLA OpenDRIVE topology, with all hazards removed and all lights forced green &mdash; isolating whether the model can actually condition on the navigation signal at all.
                       </p>
-                      <span class="sdv-axis-chip">CARLA</span>
+                      <span class="sdv-axis-chip">CARLA-F</span>
                       <span class="sdv-axis-chip">Speed Error</span>
-                      <span class="sdv-axis-chip">ISR</span>
+                      <span class="sdv-axis-chip">NCR</span>
                     </article>
 
                     <article class="sdv-axis-card">
                       <div class="sdv-axis-num">2</div>
-                      <h3>Instruction&ndash;Scene Conflict</h3>
+                      <h3>Navigation&ndash;Scene Conflict</h3>
                       <p>
                         Manually authored unsafe instructions are triggered at the moment a safety-critical event occurs (Bench2Drive, 150 routes), and ground-truth navigation commands are swapped for conflicting ones at intersections and lane-changes (NavSim, 300 scenarios). The danger is contextual &mdash; the same surface form is benign elsewhere.
                       </p>
-                      <span class="sdv-axis-chip">Bench2Drive</span>
-                      <span class="sdv-axis-chip">NavSim</span>
+                      <span class="sdv-axis-chip">B2D-C</span>
+                      <span class="sdv-axis-chip">NavSim-C</span>
                       <span class="sdv-axis-chip">DS / SR / PDMS</span>
                     </article>
 
                     <article class="sdv-axis-card">
                       <div class="sdv-axis-num">3</div>
-                      <h3>Malicious Instruction</h3>
+                      <h3>Adversarial Instruction</h3>
                       <p>
                         Adversarial &ldquo;jailbreak&rdquo;-style instructions that are unsafe to execute under <i>any</i> circumstance. Tests whether the VLA can refuse direct harmful commands rather than treating language input as authoritative.
                       </p>
+                      <span class="sdv-axis-chip">B2D-Adv</span>
                       <span class="sdv-axis-chip">Refusal Rate</span>
                       <span class="sdv-axis-chip">Safety Override</span>
                     </article>
@@ -184,7 +183,7 @@
                   <div class="sdv-hr"></div>
 
                   <p class="wb-lead">
-                    Prior VLAs entangle instruction&ndash;scene conflict awareness with action generation, causing the model to blindly predict actions without first reasoning about safety. SafeDriveVLA inserts an <b>interpretable categorical bottleneck</b> predicted <i>before</i> the action span, attributing every expert trajectory to one of three driving modes:
+                    Prior VLAs entangle navigation&ndash;scene conflict awareness with action generation, causing the model to blindly predict actions without first reasoning about safety. SafeDriveVLA inserts an <b>interpretable conflict prediction</b> emitted <i>before</i> the action span, attributing every expert frame to one of three driving modes:
                   </p>
 
                   <p class="wb-lead" style="text-align:center;">
@@ -194,11 +193,10 @@
                   </p>
 
                   <p class="wb-lead">
-                    <b>Strict</b>: execute the instruction immediately. <b>Cautious</b>: attempt to follow the instruction while prioritizing safety. <b>Fallback</b>: ignore the instruction because the safe action space is empty. By predicting the mode first, the model separates the question of <i>what should be done</i> from <i>how to do it</i>, enabling separate diagnosis of conflict awareness and trajectory quality.
+                    <b>Strict</b>: execute the navigation signal immediately. <b>Cautious</b>: follow the signal while prioritizing safety. <b>Fallback</b>: override the signal because the safe action space is empty. By predicting the mode first, the model separates the question of <i>what should be done</i> from <i>how to do it</i>, enabling separate diagnosis of conflict awareness and trajectory quality.
                   </p>
 
                   <figure style="width: 100%; max-width: 1000px; display: block; margin: 24px auto;">
-                    <!-- TODO: Replace with rendered architecture figure -->
                     <img src="assets/figures/model.png" alt="SafeDriveVLA architecture" onerror="this.outerHTML='&lt;div class=&quot;placeholder-box&quot;&gt;Architecture figure placeholder &mdash; drop assets/figures/model.png&lt;/div&gt;'">
                   </figure>
 
@@ -207,7 +205,7 @@
                     <article class="sdv-method-card">
                       <h3>Driving Mode Attribution</h3>
                       <p>
-                        Expert trajectories are not necessarily optimal; behaviour cloning confuses the model when similar instructions and scenes yield different actions. We attribute every frame to <i>strict</i>, <i>cautious</i>, or <i>fallback</i>, giving the model an explicit handle on instruction&ndash;scene conflict before the policy commits to an action.
+                        Expert trajectories are not necessarily optimal; behaviour cloning confuses the model when similar navigation signals and scenes yield different actions. We attribute every frame to <i>strict</i>, <i>cautious</i>, or <i>fallback</i>, giving the model an explicit handle on navigation&ndash;scene conflict before the policy commits to an action.
                       </p>
                     </article>
 
@@ -219,9 +217,9 @@
                     </article>
 
                     <article class="sdv-method-card">
-                      <h3>Instruction-Conditioned Dreaming</h3>
+                      <h3>Navigation-Conditioned Dreaming</h3>
                       <p>
-                        Conditioned on the driver&rsquo;s instruction, the model dreams forward in the latent world to test whether the requested behaviour is compatible with the current scene, then commits to the action consistent with the predicted driving mode.
+                        Conditioned on the navigation signal, the model dreams forward in the latent world to test whether the implied maneuver is compatible with the current scene, then commits to the action consistent with the predicted driving mode.
                       </p>
                     </article>
 
@@ -244,68 +242,30 @@
                   </p>
 
 
-                  <!-- =============== Axis 1: Instruction Following =============== -->
-                  <div class="wb-kicker" style="margin-top:1.2rem;">Axis 1 &middot; Instruction Following (CARLA)</div>
+                  <!-- =============== Axis 1: Navigation Following =============== -->
+                  <div class="wb-kicker" style="margin-top:1.2rem;">Axis 1 &middot; Navigation Following (CARLA-F)</div>
                   <div class="sdv-hr"></div>
 
-                  <section class="videogen videogen-compare" tabindex="0">
-                    <div class="video-hero">
-                      <div class="video-compare-split" data-compare>
-                        <div class="video-wrapper gt-layer">
-                          <div class="video-placeholder"><div class="ph-label">Baseline VLA &mdash; placeholder</div></div>
-                          <div class="video-label label-left">Baseline VLA</div>
-                        </div>
-                        <div class="video-wrapper gen-layer">
-                          <div class="video-placeholder"><div class="ph-label">SafeDriveVLA &mdash; placeholder</div></div>
-                          <div class="video-label label-right" data-role="method-label">SafeDriveVLA</div>
-                        </div>
-                        <div class="split-handle" data-role="split-handle"
-                            role="separator" aria-label="Drag to compare" aria-orientation="vertical">
-                          <div class="handle-line"></div>
-                          <div class="handle-arrows">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
+                  <section class="videogen" tabindex="0">
+                    <div class="sdv-video-grid">
+                      <figure class="sdv-video-item">
+                        <video src="assets/videos/carla-f-turn-left.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                        <figcaption>&ldquo;Turn left at the next intersection.&rdquo;</figcaption>
+                      </figure>
+                      <figure class="sdv-video-item">
+                        <video src="assets/videos/carla-f-turn-right.mp4" autoplay loop muted playsinline preload="metadata"></video>
+                        <figcaption>&ldquo;Turn right at the next intersection.&rdquo;</figcaption>
+                      </figure>
                     </div>
 
                     <div class="sdv-scene-caption">
-                      <b>Instruction issued:</b> &ldquo;Turn left at the next intersection and accelerate to 10&nbsp;m/s.&rdquo;
-                      Hazards are removed; the scene contains no NPC vehicles, pedestrians, or red lights &mdash; the test is purely whether the model conditions on language.
-                    </div>
-
-                    <div class="thumb-bar" role="tablist">
-                      <button class="thumb is-active" role="tab" aria-selected="true">
-                        <div class="thumb-placeholder">Scene 1</div>
-                        <span>Turn Left</span>
-                      </button>
-                      <button class="thumb" role="tab" aria-selected="false">
-                        <div class="thumb-placeholder">Scene 2</div>
-                        <span>Lane Change</span>
-                      </button>
-                      <button class="thumb" role="tab" aria-selected="false">
-                        <div class="thumb-placeholder">Scene 3</div>
-                        <span>Accelerate</span>
-                      </button>
-                      <button class="thumb" role="tab" aria-selected="false">
-                        <div class="thumb-placeholder">Scene 4</div>
-                        <span>Slow Down</span>
-                      </button>
-                      <button class="thumb" role="tab" aria-selected="false">
-                        <div class="thumb-placeholder">Scene 5</div>
-                        <span>Chained</span>
-                      </button>
+                      <b>SafeDriveVLA on CARLA-F.</b> Two free-form language instructions executed in closed loop. Hazards are removed &mdash; no NPC vehicles, pedestrians, or red lights &mdash; so the test is purely whether the model conditions on language. The on-frame overlay shows the prompt, target waypoint, and the predicted action tokens.
                     </div>
                   </section>
 
 
                   <!-- =============== Axis 2a: Bench2Drive Conflict =============== -->
-                  <div class="wb-kicker" style="margin-top:2rem;">Axis 2a &middot; Instruction&ndash;Scene Conflict (Bench2Drive)</div>
+                  <div class="wb-kicker" style="margin-top:2rem;">Axis 2a &middot; Navigation&ndash;Scene Conflict (Bench2Drive, B2D-C)</div>
                   <div class="sdv-hr"></div>
 
                   <section class="videogen videogen-compare" tabindex="0">
@@ -369,7 +329,7 @@
 
 
                   <!-- =============== Axis 2b: NavSim Conflict =============== -->
-                  <div class="wb-kicker" style="margin-top:2rem;">Axis 2b &middot; Instruction&ndash;Scene Conflict (NavSim, real-world)</div>
+                  <div class="wb-kicker" style="margin-top:2rem;">Axis 2b &middot; Navigation&ndash;Scene Conflict (NavSim, NavSim-C, real-world)</div>
                   <div class="sdv-hr"></div>
 
                   <section class="videogen videogen-compare" tabindex="0">
@@ -427,8 +387,8 @@
                   </section>
 
 
-                  <!-- =============== Axis 3: Malicious Instruction =============== -->
-                  <div class="wb-kicker" style="margin-top:2rem;">Axis 3 &middot; Malicious Instruction</div>
+                  <!-- =============== Axis 3: Adversarial Instruction =============== -->
+                  <div class="wb-kicker" style="margin-top:2rem;">Axis 3 &middot; Adversarial Instruction (B2D-Adv)</div>
                   <div class="sdv-hr"></div>
 
                   <section class="videogen videogen-compare" tabindex="0">
@@ -495,15 +455,75 @@
               <section id="results">
                 <div class="wb-section">
                   <h2>Results</h2>
-                  <div class="wb-kicker">Headline numbers across the three benchmark axes</div>
+                  <div class="wb-kicker">Closed-loop results across the standard and safety benchmarks</div>
                   <div class="sdv-hr"></div>
 
                   <p class="wb-lead">
-                    A model with strong instruction&ndash;scene conflict awareness should maintain high Driving Score and Success Rate while exhibiting <i>lower</i> infraction rates under unsafe instructions &mdash; demonstrating that it can recognize and override conflicting commands without degrading normal driving performance.
+                    We report closed-loop results following the order in the paper: overall driving quality on standard Bench2Drive, navigation-following capability on CARLA-F, navigation&ndash;scene conflict awareness on B2D-C and NavSim-C, and robustness to adversarial instructions on B2D-Adv. A strong language-conditioned driver should reach state-of-the-art driving quality and instruction following, keep infractions <i>low</i> when the navigation signal conflicts with the scene, and refuse instructions that are unsafe under <i>any</i> circumstance.
                   </p>
 
                   <div class="sdv-table-wrap">
-                    <p class="sdv-table-caption"><b>Bench2Drive instruction&ndash;scene conflict benchmark.</b> Higher Driving Score (DS) and Success Rate (SR) are better; lower infractions are better. Numbers pending final evaluation.</p>
+                    <p class="sdv-table-caption"><b>Standard Bench2Drive closed-loop benchmark.</b> Nav. = navigation signal (CMD command, WP waypoint, Lan language). <sup>*</sup> trained with &times;0.2 data scale. Higher is better for all metrics &mdash; SafeDriveVLA reaches state-of-the-art DS and SR.</p>
+                    <table class="sdv-table">
+                      <thead>
+                        <tr>
+                          <th>Method</th>
+                          <th>Nav.</th>
+                          <th>Expert</th>
+                          <th>DS &uarr;</th>
+                          <th>SR (%) &uarr;</th>
+                          <th>Efficiency &uarr;</th>
+                          <th>Comfort. &uarr;</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="group-header"><td colspan="7">Prior methods</td></tr>
+                        <tr><td>UniAD</td><td>CMD</td><td>Think2Drive</td><td>45.81</td><td>16.36</td><td>129.21</td><td>43.58</td></tr>
+                        <tr><td>VAD</td><td>CMD</td><td>Think2Drive</td><td>42.35</td><td>15.00</td><td>157.94</td><td>46.01</td></tr>
+                        <tr><td>RecogDrive</td><td>CMD</td><td>Think2Drive</td><td>71.36</td><td>45.45</td><td>138.18</td><td>17.45</td></tr>
+                        <tr><td>ORION</td><td>CMD</td><td>Think2Drive</td><td>77.74</td><td>54.62</td><td>151.48</td><td>17.38</td></tr>
+                        <tr><td>MindDrive</td><td>CMD</td><td>Think2Drive</td><td>78.04</td><td>55.09</td><td>&ndash;</td><td>&ndash;</td></tr>
+                        <tr><td>AutoVLA</td><td>Lan</td><td>PDM-Lite</td><td>78.84</td><td>57.73</td><td>146.93</td><td>39.33</td></tr>
+                        <tr><td>DriveMoE</td><td>WP</td><td>Think2Drive</td><td>74.22</td><td>48.64</td><td>175.96</td><td>15.31</td></tr>
+                        <tr><td>SimLingo<sup>*</sup></td><td>WP</td><td>PDM-Lite</td><td>81.48</td><td>53.66</td><td>246.01</td><td>42.33</td></tr>
+                        <tr class="row-ours"><td><b>SafeDriveVLA<sup>*</sup></b></td><td>WP</td><td>PDM-Lite</td><td class="best">83.64</td><td class="best">59.82</td><td class="best">260.67</td><td class="best">52.48</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="sdv-table-wrap">
+                    <p class="sdv-table-caption"><b>CARLA-F navigation-following benchmark.</b> Per-maneuver Navigation Compliance Rate (NCR, %); Speed is Speed Error (lower is better) and Avg. is mean NCR. <sup>*</sup> trained with &times;0.2 data scale. From language alone, SafeDriveVLA leads all language-conditioned models and recovers lane-change NCR from 0%.</p>
+                    <table class="sdv-table">
+                      <thead>
+                        <tr>
+                          <th>Model</th>
+                          <th>Nav.</th>
+                          <th>Speed &darr;</th>
+                          <th>Turn left</th>
+                          <th>Turn right</th>
+                          <th>Go straight</th>
+                          <th>Left lane</th>
+                          <th>Right lane</th>
+                          <th>Lane follow</th>
+                          <th>Avg. &uarr;</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="group-header"><td colspan="10">Command-conditioned</td></tr>
+                        <tr><td>ORION</td><td>CMD</td><td>&ndash;</td><td>100.0</td><td>100.0</td><td>94.1</td><td>60.6</td><td>58.6</td><td>86.2</td><td>87.8</td></tr>
+                        <tr><td>MindDrive</td><td>CMD</td><td>&ndash;</td><td>100.0</td><td>92.2</td><td>94.1</td><td>33.3</td><td>37.9</td><td>70.7</td><td>78.8</td></tr>
+                        <tr><td>AutoMoT</td><td>CMD</td><td>&ndash;</td><td>98.2</td><td>100.0</td><td>97.6</td><td>21.2</td><td>27.6</td><td>89.7</td><td>82.0</td></tr>
+                        <tr class="group-header"><td colspan="10">Language-conditioned</td></tr>
+                        <tr><td>SimLingo</td><td>Lan</td><td>1.44</td><td>83.6</td><td>80.4</td><td>45.9</td><td>0.0</td><td>0.0</td><td>63.8</td><td>52.4</td></tr>
+                        <tr><td>SimLingo-IF</td><td>Lan</td><td class="best">1.31</td><td>89.1</td><td>82.3</td><td>49.4</td><td>0.0</td><td>0.0</td><td>69.0</td><td>55.6</td></tr>
+                        <tr><td>SimLingo-Safe</td><td>Lan</td><td>1.67</td><td class="best">92.7</td><td>84.3</td><td>50.0</td><td>0.0</td><td>0.0</td><td>62.1</td><td>55.6</td></tr>
+                        <tr class="row-ours"><td><b>SafeDriveVLA<sup>*</sup></b></td><td>Lan</td><td>4.27</td><td>87.8</td><td class="best">98.0</td><td class="best">89.0</td><td class="best">66.7</td><td class="best">72.4</td><td class="best">82.5</td><td class="best">82.7</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="sdv-table-wrap">
+                    <p class="sdv-table-caption"><b>Bench2Drive navigation&ndash;scene conflict benchmark (B2D-C).</b> Free-form language instruction is the sole navigation signal; we compare against SimLingo variants, the only baseline supporting language-conditioned driving. Higher DS / SR are better; lower infractions are better. <sup>*</sup> trained with &times;0.2 data scale.</p>
                     <table class="sdv-table">
                       <thead>
                         <tr>
@@ -511,22 +531,22 @@
                           <th>DS &uarr;</th>
                           <th>SR (%) &uarr;</th>
                           <th>Collision &darr;</th>
-                          <th>Off-road &darr;</th>
-                          <th>Rule Viol. &darr;</th>
+                          <th>Traffic Viol. &darr;</th>
+                          <th>Out of Route &darr;</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="group-header"><td colspan="6">Baseline VLAs</td></tr>
-                        <tr><td>SimLingo</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td></tr>
-                        <tr><td>OpenDriveVLA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td></tr>
-                        <tr><td>AutoVLA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td></tr>
-                        <tr class="row-ours"><td><b>SafeDriveVLA</b></td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td></tr>
+                        <tr class="group-header"><td colspan="6">Baseline VLA</td></tr>
+                        <tr><td>SimLingo</td><td>72.8</td><td>36.7</td><td>66</td><td>60</td><td>18</td></tr>
+                        <tr><td>SimLingo-IF</td><td>56.3</td><td>12.7</td><td>166</td><td>57</td><td>32</td></tr>
+                        <tr><td>SimLingo-Safe</td><td class="best">72.8</td><td class="best">38.0</td><td>60</td><td>61</td><td>11</td></tr>
+                        <tr class="row-ours"><td><b>SafeDriveVLA<sup>*</sup></b></td><td>67.3</td><td>35.8</td><td class="best">45</td><td class="best">9</td><td class="best">1</td></tr>
                       </tbody>
                     </table>
                   </div>
 
                   <div class="sdv-table-wrap">
-                    <p class="sdv-table-caption"><b>NavSim instruction&ndash;scene conflict benchmark.</b> Higher PDMS (composite), NC, DAC, TTC, C., EP are better.</p>
+                    <p class="sdv-table-caption"><b>NavSim-C navigation&ndash;scene conflict benchmark.</b> On the real-world NavSim split, existing VLAs degrade substantially when the injected command conflicts with the scene. Higher is better for all metrics; PDMS is the composite score.</p>
                     <table class="sdv-table">
                       <thead>
                         <tr>
@@ -535,15 +555,36 @@
                           <th>DAC &uarr;</th>
                           <th>TTC &uarr;</th>
                           <th>C. &uarr;</th>
+                          <th>DDC &uarr;</th>
                           <th>EP &uarr;</th>
                           <th>PDMS &uarr;</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="group-header"><td colspan="7">Baseline VLAs</td></tr>
-                        <tr><td>SimLingo</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td></tr>
-                        <tr><td>Vega</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td></tr>
-                        <tr class="row-ours"><td><b>SafeDriveVLA</b></td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td><td class="pending">TBA</td></tr>
+                        <tr><td>AutoVLA</td><td>93.6</td><td>79.0</td><td>88.0</td><td class="best">100.0</td><td>86.0</td><td>66.6</td><td>70.7</td></tr>
+                        <tr><td>ReCogDrive</td><td>95.0</td><td>91.3</td><td>92.6</td><td class="best">100.0</td><td>94.7</td><td>76.7</td><td>81.7</td></tr>
+                        <tr><td>CuriousVLA</td><td>95.3</td><td class="best">93.0</td><td class="best">94.7</td><td>98.3</td><td class="best">97.2</td><td class="best">85.4</td><td class="best">84.4</td></tr>
+                        <tr><td>DriveVLA-W0</td><td class="best">96.3</td><td>87.0</td><td>91.7</td><td class="best">100.0</td><td>97.0</td><td>71.0</td><td>76.9</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="sdv-table-wrap">
+                    <p class="sdv-table-caption"><b>B2D-Adv adversarial instruction benchmark.</b> Driving Score on benign Bench2Drive routes (B2D) vs. adversarial instructions that explicitly try to override the safety prior (B2D-Adv); higher is better. SafeDriveVLA surpasses SimLingo by &asymp;70% under attack, and the ablation shows the mode token and world model each help.</p>
+                    <table class="sdv-table">
+                      <thead>
+                        <tr>
+                          <th>Method</th>
+                          <th>B2D DS &uarr;</th>
+                          <th>B2D-Adv DS &uarr;</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>SimLingo</td><td>71.6</td><td>43.8</td></tr>
+                        <tr class="group-header"><td colspan="3">SafeDriveVLA ablation</td></tr>
+                        <tr><td>baseline (no mode, no WM)</td><td>76.3</td><td>71.4</td></tr>
+                        <tr><td>w/ mode</td><td>81.6</td><td>77.5</td></tr>
+                        <tr class="row-ours"><td><b>SafeDriveVLA<sup>*</sup></b> (w/ mode + WM)</td><td class="best">82.8</td><td class="best">78.4</td></tr>
                       </tbody>
                     </table>
                   </div>
