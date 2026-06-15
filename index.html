@@ -238,7 +238,7 @@
                   <div class="sdv-hr"></div>
 
                   <p class="wb-lead">
-                    Each block below shows SafeDriveVLA driving on one axis of the benchmark. Use the thumbnail strip to switch between scenes within an axis, and read the caption for the instruction issued to the model. Side-by-side baseline comparisons are temporarily disabled while we finalize the baseline footage.
+                    In CARLA-F (Axis 1), drag the handle to compare <b>SimLingo</b> (left) with <b>SafeDriveVLA</b> (right), and use the thumbnail strip to switch between scenes. Each caption lists the instruction issued to the model. The remaining axes are being populated with clips.
                   </p>
 
 
@@ -246,30 +246,75 @@
                   <div class="wb-kicker" style="margin-top:1.2rem;">Axis 1 &middot; Navigation Following (CARLA-F)</div>
                   <div class="sdv-hr"></div>
 
-                  <section class="videogen sdv-scene-player" tabindex="0">
-                    <div class="sdv-video-single">
-                      <video class="sdv-scene-video" controls autoplay loop muted playsinline preload="metadata"
-                          src="assets/videos/carla-f-turn-left.mp4"></video>
+                  <section class="videogen videogen-compare sdv-compare-player" tabindex="0">
+                    <div class="video-hero">
+                      <div class="video-compare-split" data-compare style="--split:50%;">
+                        <div class="video-wrapper gt-layer">
+                          <video class="sdv-cmp-baseline video-el" autoplay loop muted playsinline preload="metadata"
+                              src="assets/videos/carla-f-turn-left-baseline.mp4"></video>
+                          <div class="video-label label-left">SimLingo</div>
+                        </div>
+                        <div class="video-wrapper gen-layer">
+                          <video class="sdv-cmp-method video-el" autoplay loop muted playsinline preload="metadata"
+                              src="assets/videos/carla-f-turn-left.mp4"></video>
+                          <div class="video-label label-right">SafeDriveVLA</div>
+                        </div>
+                        <div class="split-handle" data-role="split-handle"
+                            role="separator" aria-label="Drag to compare" aria-orientation="vertical">
+                          <div class="handle-line"></div>
+                          <div class="handle-arrows">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     <div class="sdv-scene-caption">
                       <b>Instruction issued:</b>
                       <span class="sdv-cap-instruction">&ldquo;Turn left at the next intersection.&rdquo;</span>
-                      Hazards are removed &mdash; no NPC vehicles, pedestrians, or red lights &mdash; so the test is purely whether the model conditions on language. The on-frame overlay shows the prompt, target waypoint, and predicted action tokens.
+                      Hazards are removed &mdash; no NPC vehicles, pedestrians, or red lights &mdash; so the test is purely whether the model conditions on language. Drag the handle to compare SimLingo (left) with SafeDriveVLA (right).
                     </div>
 
                     <div class="thumb-bar" role="tablist">
                       <button class="thumb is-active" role="tab" aria-selected="true"
-                          data-video="assets/videos/carla-f-turn-left.mp4"
+                          data-baseline="assets/videos/carla-f-turn-left-baseline.mp4"
+                          data-method="assets/videos/carla-f-turn-left.mp4"
                           data-instruction="&ldquo;Turn left at the next intersection.&rdquo;">
                         <img src="assets/videos/thumb-turn-left.jpg" alt="Turn Left scene">
                         <span>Scene 1 &middot; Turn Left</span>
                       </button>
                       <button class="thumb" role="tab" aria-selected="false"
-                          data-video="assets/videos/carla-f-turn-right.mp4"
+                          data-baseline="assets/videos/carla-f-turn-right-baseline.mp4"
+                          data-method="assets/videos/carla-f-turn-right.mp4"
                           data-instruction="&ldquo;Turn right at the next intersection.&rdquo;">
                         <img src="assets/videos/thumb-turn-right.jpg" alt="Turn Right scene">
                         <span>Scene 2 &middot; Turn Right</span>
+                      </button>
+                      <button class="thumb" role="tab" aria-selected="false"
+                          data-baseline="assets/videos/carla-f-turn-straight-baseline.mp4"
+                          data-method="assets/videos/carla-f-turn-straight.mp4"
+                          data-instruction="&ldquo;Go straight through the next intersection.&rdquo;">
+                        <img src="assets/videos/thumb-turn-straight.jpg" alt="Go Straight scene">
+                        <span>Scene 3 &middot; Go Straight</span>
+                      </button>
+                      <button class="thumb" role="tab" aria-selected="false"
+                          data-baseline="assets/videos/carla-f-lane-change-baseline.mp4"
+                          data-method="assets/videos/carla-f-lane-change.mp4"
+                          data-instruction="&ldquo;Shift over to the right lane.&rdquo;">
+                        <img src="assets/videos/thumb-lane-change.jpg" alt="Lane Change scene">
+                        <span>Scene 4 &middot; Lane Change</span>
+                      </button>
+                      <button class="thumb" role="tab" aria-selected="false"
+                          data-baseline="assets/videos/carla-f-chained-baseline.mp4"
+                          data-method="assets/videos/carla-f-chained.mp4"
+                          data-instruction="A sequence of instructions chained back-to-back along one route.">
+                        <img src="assets/videos/thumb-chained.jpg" alt="Chained scene">
+                        <span>Scene 5 &middot; Chained</span>
                       </button>
                     </div>
                   </section>

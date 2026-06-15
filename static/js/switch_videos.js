@@ -81,3 +81,68 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// CARLA-F comparison player — draggable split (SimLingo vs SafeDriveVLA) + thumbnail scene selection.
+// Scoped to .sdv-compare-player so placeholder thumbnails in other axes are untouched.
+document.addEventListener("DOMContentLoaded", function() {
+
+    function pointerX(e) {
+        return (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+    }
+
+    function initSplitDrag(split) {
+        var dragging = false;
+        function setSplit(clientX) {
+            var rect = split.getBoundingClientRect();
+            var pct = ((clientX - rect.left) / rect.width) * 100;
+            pct = Math.max(0, Math.min(100, pct));
+            split.style.setProperty('--split', pct + '%');
+        }
+        function down(e) { dragging = true; setSplit(pointerX(e)); e.preventDefault(); }
+        function move(e) { if (dragging) { setSplit(pointerX(e)); } }
+        function up() { dragging = false; }
+        split.addEventListener('mousedown', down);
+        window.addEventListener('mousemove', move);
+        window.addEventListener('mouseup', up);
+        split.addEventListener('touchstart', down, { passive: false });
+        window.addEventListener('touchmove', move, { passive: false });
+        window.addEventListener('touchend', up);
+    }
+
+    function loadVideo(v, src) {
+        if (v && src) {
+            v.setAttribute('src', src);
+            v.load();
+            var p = v.play();
+            if (p && p.catch) { p.catch(function() {}); }
+        }
+    }
+
+    document.querySelectorAll('.sdv-compare-player').forEach(function(player) {
+        var split = player.querySelector('[data-compare]');
+        var baseline = player.querySelector('.sdv-cmp-baseline');
+        var method = player.querySelector('.sdv-cmp-method');
+        var capInstruction = player.querySelector('.sdv-cap-instruction');
+        var thumbs = player.querySelectorAll('.thumb');
+
+        if (split) { initSplitDrag(split); }
+
+        thumbs.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                loadVideo(baseline, btn.dataset.baseline);
+                loadVideo(method, btn.dataset.method);
+                if (capInstruction && btn.dataset.instruction) {
+                    capInstruction.textContent = btn.dataset.instruction;
+                }
+                if (split) { split.style.setProperty('--split', '50%'); }
+                thumbs.forEach(function(t) {
+                    t.classList.remove('is-active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                btn.classList.add('is-active');
+                btn.setAttribute('aria-selected', 'true');
+            });
+        });
+    });
+});
+
+
