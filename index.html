@@ -234,11 +234,11 @@
               <section id="demos">
                 <div class="wb-section">
                   <h2>Video Demos</h2>
-                  <div class="wb-kicker">Baseline VLA vs. SafeDriveVLA on the three benchmark axes</div>
+                  <div class="wb-kicker">SafeDriveVLA across the three benchmark axes</div>
                   <div class="sdv-hr"></div>
 
                   <p class="wb-lead">
-                    Each block below shows a side-by-side comparison: the baseline VLA on the left and SafeDriveVLA on the right, with a draggable handle to reveal either side. The thumbnail strip switches between scenes within the same axis. Each caption describes the instruction issued to the model.
+                    Each block below shows SafeDriveVLA driving on one axis of the benchmark. Use the thumbnail strip to switch between scenes within an axis, and read the caption for the instruction issued to the model. Side-by-side baseline comparisons are temporarily disabled while we finalize the baseline footage.
                   </p>
 
 
@@ -246,20 +246,31 @@
                   <div class="wb-kicker" style="margin-top:1.2rem;">Axis 1 &middot; Navigation Following (CARLA-F)</div>
                   <div class="sdv-hr"></div>
 
-                  <section class="videogen" tabindex="0">
-                    <div class="sdv-video-grid">
-                      <figure class="sdv-video-item">
-                        <video src="assets/videos/carla-f-turn-left.mp4" autoplay loop muted playsinline preload="metadata"></video>
-                        <figcaption>&ldquo;Turn left at the next intersection.&rdquo;</figcaption>
-                      </figure>
-                      <figure class="sdv-video-item">
-                        <video src="assets/videos/carla-f-turn-right.mp4" autoplay loop muted playsinline preload="metadata"></video>
-                        <figcaption>&ldquo;Turn right at the next intersection.&rdquo;</figcaption>
-                      </figure>
+                  <section class="videogen sdv-scene-player" tabindex="0">
+                    <div class="sdv-video-single">
+                      <video class="sdv-scene-video" controls autoplay loop muted playsinline preload="metadata"
+                          src="assets/videos/carla-f-turn-left.mp4"></video>
                     </div>
 
                     <div class="sdv-scene-caption">
-                      <b>SafeDriveVLA on CARLA-F.</b> Two free-form language instructions executed in closed loop. Hazards are removed &mdash; no NPC vehicles, pedestrians, or red lights &mdash; so the test is purely whether the model conditions on language. The on-frame overlay shows the prompt, target waypoint, and the predicted action tokens.
+                      <b>Instruction issued:</b>
+                      <span class="sdv-cap-instruction">&ldquo;Turn left at the next intersection.&rdquo;</span>
+                      Hazards are removed &mdash; no NPC vehicles, pedestrians, or red lights &mdash; so the test is purely whether the model conditions on language. The on-frame overlay shows the prompt, target waypoint, and predicted action tokens.
+                    </div>
+
+                    <div class="thumb-bar" role="tablist">
+                      <button class="thumb is-active" role="tab" aria-selected="true"
+                          data-video="assets/videos/carla-f-turn-left.mp4"
+                          data-instruction="&ldquo;Turn left at the next intersection.&rdquo;">
+                        <img src="assets/videos/thumb-turn-left.jpg" alt="Turn Left scene">
+                        <span>Scene 1 &middot; Turn Left</span>
+                      </button>
+                      <button class="thumb" role="tab" aria-selected="false"
+                          data-video="assets/videos/carla-f-turn-right.mp4"
+                          data-instruction="&ldquo;Turn right at the next intersection.&rdquo;">
+                        <img src="assets/videos/thumb-turn-right.jpg" alt="Turn Right scene">
+                        <span>Scene 2 &middot; Turn Right</span>
+                      </button>
                     </div>
                   </section>
 
@@ -268,30 +279,9 @@
                   <div class="wb-kicker" style="margin-top:2rem;">Axis 2a &middot; Navigation&ndash;Scene Conflict (Bench2Drive, B2D-C)</div>
                   <div class="sdv-hr"></div>
 
-                  <section class="videogen videogen-compare" tabindex="0">
+                  <section class="videogen" tabindex="0">
                     <div class="video-hero">
-                      <div class="video-compare-split" data-compare>
-                        <div class="video-wrapper gt-layer">
-                          <div class="video-placeholder"><div class="ph-label">Baseline VLA &mdash; placeholder</div></div>
-                          <div class="video-label label-left">Baseline VLA</div>
-                        </div>
-                        <div class="video-wrapper gen-layer">
-                          <div class="video-placeholder"><div class="ph-label">SafeDriveVLA &mdash; placeholder</div></div>
-                          <div class="video-label label-right" data-role="method-label">SafeDriveVLA</div>
-                        </div>
-                        <div class="split-handle" data-role="split-handle"
-                            role="separator" aria-label="Drag to compare" aria-orientation="vertical">
-                          <div class="handle-line"></div>
-                          <div class="handle-arrows">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="video-placeholder"><div class="ph-label">SafeDriveVLA &mdash; clip coming soon</div></div>
                     </div>
 
                     <div class="sdv-scene-caption">
@@ -332,30 +322,9 @@
                   <div class="wb-kicker" style="margin-top:2rem;">Axis 2b &middot; Navigation&ndash;Scene Conflict (NavSim, NavSim-C, real-world)</div>
                   <div class="sdv-hr"></div>
 
-                  <section class="videogen videogen-compare" tabindex="0">
+                  <section class="videogen" tabindex="0">
                     <div class="video-hero">
-                      <div class="video-compare-split" data-compare>
-                        <div class="video-wrapper gt-layer">
-                          <div class="video-placeholder"><div class="ph-label">Baseline VLA &mdash; placeholder</div></div>
-                          <div class="video-label label-left">Baseline VLA</div>
-                        </div>
-                        <div class="video-wrapper gen-layer">
-                          <div class="video-placeholder"><div class="ph-label">SafeDriveVLA &mdash; placeholder</div></div>
-                          <div class="video-label label-right" data-role="method-label">SafeDriveVLA</div>
-                        </div>
-                        <div class="split-handle" data-role="split-handle"
-                            role="separator" aria-label="Drag to compare" aria-orientation="vertical">
-                          <div class="handle-line"></div>
-                          <div class="handle-arrows">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="video-placeholder"><div class="ph-label">SafeDriveVLA &mdash; clip coming soon</div></div>
                     </div>
 
                     <div class="sdv-scene-caption">
@@ -391,30 +360,9 @@
                   <div class="wb-kicker" style="margin-top:2rem;">Axis 3 &middot; Adversarial Instruction (B2D-Adv)</div>
                   <div class="sdv-hr"></div>
 
-                  <section class="videogen videogen-compare" tabindex="0">
+                  <section class="videogen" tabindex="0">
                     <div class="video-hero">
-                      <div class="video-compare-split" data-compare>
-                        <div class="video-wrapper gt-layer">
-                          <div class="video-placeholder"><div class="ph-label">Baseline VLA &mdash; placeholder</div></div>
-                          <div class="video-label label-left">Baseline VLA</div>
-                        </div>
-                        <div class="video-wrapper gen-layer">
-                          <div class="video-placeholder"><div class="ph-label">SafeDriveVLA &mdash; placeholder</div></div>
-                          <div class="video-label label-right" data-role="method-label">SafeDriveVLA</div>
-                        </div>
-                        <div class="split-handle" data-role="split-handle"
-                            role="separator" aria-label="Drag to compare" aria-orientation="vertical">
-                          <div class="handle-line"></div>
-                          <div class="handle-arrows">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="video-placeholder"><div class="ph-label">SafeDriveVLA &mdash; clip coming soon</div></div>
                     </div>
 
                     <div class="sdv-scene-caption">
