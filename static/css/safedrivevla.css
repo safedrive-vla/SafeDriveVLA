@@ -462,8 +462,9 @@ d-article section .wb-section {
 .wb-footer a { color: #b91c1c; text-decoration: none; }
 .wb-footer a:hover { text-decoration: underline; }
 
-/* Axis 1 — SimLingo vs SafeDriveVLA comparison player (clips cropped to a 2:1 camera view) */
+/* Axis 1 — SimLingo vs SafeDriveVLA comparison player (full 1024x912 frames, camera-aligned) */
+.sdv-compare-player { max-width: 720px; }
 .sdv-compare-player .video-hero {
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 1024 / 912;
 }
 .sdv-compare-player .video-compare-split { cursor: ew-resize; }
