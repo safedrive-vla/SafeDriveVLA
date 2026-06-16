@@ -83,15 +83,12 @@ d-article section .wb-section {
   margin: .75rem 0 1.25rem;
 }
 
-/* Benchmark cards — three axes */
+/* Benchmark cards — three axes, stacked vertically */
 #benchmark .wb-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
   margin-top: 1rem;
-}
-@media (max-width: 1024px) {
-  #benchmark .wb-grid { grid-template-columns: 1fr; }
 }
 .sdv-axis-card {
   border: 1px solid #e5e7eb;
@@ -140,6 +137,27 @@ d-article section .wb-section {
   background: #fef3c7;
   color: #92400e;
   margin-right: 0.3rem;
+}
+.sdv-axis-chip--metric {
+  text-transform: none;
+  letter-spacing: 0.01em;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.sdv-axis-meta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.3rem;
+  margin-top: 0.45rem;
+}
+.sdv-axis-label {
+  flex: 0 0 3.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6b7280;
 }
 
 /* Method sub-blocks */

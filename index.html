@@ -22,7 +22,7 @@
         <script src="./static/js/switch_videos.js?v=2"></script>
 
         <link rel="stylesheet" href="./static/css/style.css">
-        <link rel="stylesheet" href="./static/css/safedrivevla.css?v=2">
+        <link rel="stylesheet" href="./static/css/safedrivevla.css?v=3">
         <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
@@ -48,7 +48,7 @@
                   <span style="display:flex; align-items:center; gap:0.4rem; margin-bottom:1.2rem; font-weight:600; font-size:1.4rem; color:#fff;">
                     SafeDriveVLA Team
                   </span>
-                  <span style="opacity:0.92;">Decoupling navigation&ndash;scene conflict reasoning from action generation through an interpretable conflict prediction, so VLA drivers can recognize when a navigation signal is unsafe given the surrounding scene.</span>
+                  <span style="opacity:0.92;">Decoupling navigation&ndash;scene conflict reasoning from action generation through an interpretable conflict prediction, paired with <b style="color:#fde68a; font-weight:600; opacity:1;">navigation-conditioned world model dreaming</b> that exposes whether the instructed maneuver is feasible before the policy commits. Together, they let VLA drivers recognize when a navigation signal is unsafe given the surrounding scene.</span>
                 </h2>
 
                 <!-- Resource links (arXiv / PDF / GitHub / Data) hidden for anonymous submission. Restore after de-anonymization. -->
@@ -141,9 +141,15 @@
                       <p>
                         For each meta-command, a pool of paraphrased natural-language instructions is issued on routes synthesized from the CARLA OpenDRIVE topology, with all hazards removed and all lights forced green, isolating whether the model can actually condition on the navigation signal at all.
                       </p>
-                      <span class="sdv-axis-chip">CARLA-F</span>
-                      <span class="sdv-axis-chip">Speed Error</span>
-                      <span class="sdv-axis-chip">NCR</span>
+                      <div class="sdv-axis-meta">
+                        <span class="sdv-axis-label">Data</span>
+                        <span class="sdv-axis-chip">CARLA-F</span>
+                      </div>
+                      <div class="sdv-axis-meta">
+                        <span class="sdv-axis-label">Metric</span>
+                        <span class="sdv-axis-chip sdv-axis-chip--metric">Speed Error (SE)</span>
+                        <span class="sdv-axis-chip sdv-axis-chip--metric">Navigation Compliance Rate (NCR)</span>
+                      </div>
                     </article>
 
                     <article class="sdv-axis-card">
@@ -152,9 +158,17 @@
                       <p>
                         Manually authored unsafe instructions are triggered at the moment a safety-critical event occurs (Bench2Drive, 150 routes), and ground-truth navigation commands are swapped for conflicting ones at intersections and lane-changes (NavSim, 300 scenarios). The danger is contextual, since the same surface form is benign elsewhere.
                       </p>
-                      <span class="sdv-axis-chip">B2D-C</span>
-                      <span class="sdv-axis-chip">NavSim-C</span>
-                      <span class="sdv-axis-chip">DS / SR / PDMS</span>
+                      <div class="sdv-axis-meta">
+                        <span class="sdv-axis-label">Data</span>
+                        <span class="sdv-axis-chip">B2D-C</span>
+                        <span class="sdv-axis-chip">NavSim-C</span>
+                      </div>
+                      <div class="sdv-axis-meta">
+                        <span class="sdv-axis-label">Metric</span>
+                        <span class="sdv-axis-chip sdv-axis-chip--metric">Driving Score (DS)</span>
+                        <span class="sdv-axis-chip sdv-axis-chip--metric">Success Rate (SR)</span>
+                        <span class="sdv-axis-chip sdv-axis-chip--metric">Predictive Driver Model Score (PDMS)</span>
+                      </div>
                     </article>
 
                     <article class="sdv-axis-card">
@@ -163,9 +177,15 @@
                       <p>
                         Adversarial &ldquo;jailbreak&rdquo;-style instructions that are unsafe to execute under <i>any</i> circumstance. Tests whether the VLA can refuse direct harmful commands rather than treating language input as authoritative.
                       </p>
-                      <span class="sdv-axis-chip">B2D-Adv</span>
-                      <span class="sdv-axis-chip">Refusal Rate</span>
-                      <span class="sdv-axis-chip">Safety Override</span>
+                      <div class="sdv-axis-meta">
+                        <span class="sdv-axis-label">Data</span>
+                        <span class="sdv-axis-chip">B2D-Adv</span>
+                      </div>
+                      <div class="sdv-axis-meta">
+                        <span class="sdv-axis-label">Metric</span>
+                        <span class="sdv-axis-chip sdv-axis-chip--metric">Driving Score (DS)</span>
+                        <span class="sdv-axis-chip sdv-axis-chip--metric">Success Rate (SR)</span>
+                      </div>
                     </article>
 
                   </div>
@@ -194,6 +214,10 @@
 
                   <p class="wb-lead">
                     <b>Strict</b>: execute the navigation signal immediately. <b>Cautious</b>: follow the signal while prioritizing safety. <b>Fallback</b>: override the signal because the safe action space is empty. By predicting the mode first, the model separates the question of <i>what should be done</i> from <i>how to do it</i>, enabling separate diagnosis of conflict awareness and trajectory quality.
+                  </p>
+
+                  <p class="wb-lead">
+                    Predicting the mode tells the model that a conflict <i>may</i> exist; a <b>navigation-conditioned world model</b> lets it <i>see</i> that conflict before committing. We pretrain a latent world model on driving video (a frozen V-JEPA&nbsp;2 encoder paired with an action-conditioned predictor) that imagines how the scene will evolve over the next 2.5&nbsp;seconds. Unlike prior world models that roll the scene forward under the ground-truth expert action, <span class="sdv-name"><span class="s1">S</span><span class="a1">a</span><span class="f">f</span><span class="e1">e</span><span class="d">D</span><span class="r">r</span><span class="i">i</span><span class="v1">v</span><span class="e2">e</span><span class="v2">V</span><span class="l">L</span><span class="a2">A</span></span> dreams forward under a per&ndash;meta-command <b>action anchor that strictly executes the current navigation signal</b>. When the instructed maneuver is feasible the dreamed latents stay benign; when an adjacent vehicle occupies the target lane or a hazard blocks the path, they encode the conflict and steer the policy to defer or override the maneuver even when it is explicitly instructed. These dreamed latents are handed to the VLA backbone alongside the observations and navigation signal, grounding the predicted mode in an imagined rollout rather than surface form alone.
                   </p>
 
                   <figure style="width: 100%; max-width: 1000px; display: block; margin: 24px auto;">
@@ -234,16 +258,16 @@
               <section id="demos">
                 <div class="wb-section">
                   <h2>Video Demos</h2>
-                  <div class="wb-kicker">SafeDriveVLA across the three benchmark axes</div>
+                  <div class="wb-kicker">SafeDriveVLA across different benchmarks</div>
                   <div class="sdv-hr"></div>
 
                   <p class="wb-lead">
-                    In CARLA-F (Axis 1) and B2D-C (Axis 2), drag the handle to compare <b>SimLingo</b> (left) with <b>SafeDriveVLA</b> (right), and use the thumbnail strip to switch between scenes. Each caption lists the instruction issued to the model.
+                    In CARLA-F and B2D-C, drag the handle to compare <b>SimLingo</b> (left) with <b>SafeDriveVLA</b> (right), and use the thumbnail strip to switch between scenes. Each caption lists the instruction issued to the model.
                   </p>
 
 
                   <!-- =============== Axis 1: Navigation Following =============== -->
-                  <div class="wb-kicker" style="margin-top:1.2rem;">Axis 1 &middot; Navigation Following (CARLA-F)</div>
+                  <div class="wb-kicker" style="margin-top:1.2rem;">Navigation Following (CARLA-F)</div>
                   <div class="sdv-hr"></div>
 
                   <section class="videogen videogen-compare sdv-compare-player" tabindex="0">
@@ -321,7 +345,7 @@
 
 
                   <!-- =============== Axis 2: Bench2Drive Conflict =============== -->
-                  <div class="wb-kicker" style="margin-top:2rem;">Axis 2 &middot; Navigation&ndash;Scene Conflict (Bench2Drive, B2D-C)</div>
+                  <div class="wb-kicker" style="margin-top:2rem;">Navigation&ndash;Scene Conflict (Bench2Drive, B2D-C)</div>
                   <div class="sdv-hr"></div>
 
                   <section class="videogen videogen-compare sdv-compare-player" tabindex="0">
