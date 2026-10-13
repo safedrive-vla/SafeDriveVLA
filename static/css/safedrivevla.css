@@ -664,3 +664,90 @@ d-article section .wb-section {
 
 /* Table-of-contents heading */
 d-article d-contents nav h4 { color: #255799; }
+
+/* ===== Overview video: its own band between the header and the article ===== */
+.sdv-overview {
+  padding: 3.2rem 1.5rem 0.75rem;
+  background: #fff;
+}
+.sdv-overview-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  text-align: center;
+}
+.sdv-overview-kicker {
+  font-family: "Satoshi", -apple-system, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #255799;
+}
+.sdv-overview-kicker::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin: 0.75rem auto 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #255799, #4a7cc0 55%, #D4A300);
+}
+.sdv-overview-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0c1b33;
+  border: 1px solid rgba(12, 27, 51, 0.08);
+  box-shadow: 0 30px 60px -28px rgba(12, 27, 51, 0.55), 0 2px 8px rgba(12, 27, 51, 0.08);
+}
+.sdv-overview-frame video {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.sdv-overview-frame video:not([controls]) { cursor: pointer; }
+.sdv-overview-play {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1.1rem 0.45rem 0.45rem;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: "Satoshi", -apple-system, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0c1b33;
+  background: rgba(255, 253, 244, 0.95);
+  box-shadow: 0 0 0 5px rgba(245, 215, 126, 0.5), 0 14px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.sdv-overview-play:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 5px rgba(245, 215, 126, 0.85), 0 18px 34px rgba(0, 0, 0, 0.4);
+}
+.sdv-overview-play[hidden] { display: none; }
+.sdv-overview-play-ic {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4a7cc0, #1d4a85);
+}
+.sdv-overview-play-ic svg { width: 18px; height: 18px; margin-left: 2px; fill: #fff; }
+.sdv-overview-dur {
+  font-weight: 600;
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 640px) {
+  .sdv-overview { padding: 2rem 16px 0.5rem; }
+  .sdv-overview-frame { border-radius: 12px; }
+  .sdv-overview-play { left: 12px; bottom: 12px; font-size: 0.85rem; }
+  .sdv-overview-play-ic { width: 32px; height: 32px; }
+}

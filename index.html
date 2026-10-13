@@ -22,7 +22,7 @@
         <script src="./static/js/switch_videos.js?v=2"></script>
 
         <link rel="stylesheet" href="./static/css/style.css">
-        <link rel="stylesheet" href="./static/css/safedrivevla.css?v=13">
+        <link rel="stylesheet" href="./static/css/safedrivevla.css?v=14">
         <link rel="stylesheet" href="./static/css/benchmark_browser.css?v=1">
         <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
@@ -102,6 +102,36 @@
                 </div>
             </div>
         </div>
+
+        <!-- ==================== Overview video ==================== -->
+        <section class="sdv-overview" id="overview" aria-label="Two-minute overview video">
+            <div class="sdv-overview-inner">
+                <div class="sdv-overview-kicker">Two-minute overview</div>
+                <div class="sdv-overview-frame">
+                    <video id="sdv-overview-video" controls playsinline preload="metadata"
+                        poster="assets/videos/overview-poster.jpg">
+                        <source src="assets/videos/overview.mp4" type="video/mp4">
+                    </video>
+                    <button class="sdv-overview-play" type="button" aria-label="Play the overview video">
+                        <span class="sdv-overview-play-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg></span>
+                        <span>Play overview</span><span class="sdv-overview-dur">1:55</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <script>
+          (function () {
+            var v = document.getElementById("sdv-overview-video");
+            var b = document.querySelector(".sdv-overview-play");
+            if (!v || !b) return;
+            // Clean poster with a single play button; native controls appear once playback starts.
+            v.controls = false;
+            function start() { v.controls = true; b.hidden = true; v.play(); }
+            b.addEventListener("click", start);
+            v.addEventListener("click", function () { if (!v.controls) start(); });
+            v.addEventListener("play", function () { v.controls = true; b.hidden = true; });
+          })();
+        </script>
 
         <d-article>
             <d-contents>
