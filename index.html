@@ -23,6 +23,7 @@
 
         <link rel="stylesheet" href="./static/css/style.css">
         <link rel="stylesheet" href="./static/css/safedrivevla.css?v=13">
+        <link rel="stylesheet" href="./static/css/benchmark_browser.css?v=1">
         <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
@@ -202,6 +203,79 @@
                     </article>
 
                   </div>
+
+                  <!-- =============== Benchmark browser (CARLA-F / B2D-C examples) =============== -->
+                  <div class="wb-kicker" style="margin-top:2rem;">Explore the benchmarks</div>
+                  <div class="sdv-hr"></div>
+                  <p class="wb-lead">
+                    Ten example routes from CARLA-F and ten from B2D-C, replayed from a closed-loop run. Pick a route below, then click an instruction to see the front camera at the moment it fired and where the car was on the map.
+                  </p>
+
+                  <div class="sdv-bx" id="sdv-bx" tabindex="-1">
+                    <div class="sdv-bx-top">
+                      <p class="sdv-bx-blurb"></p>
+                      <div class="sdv-bx-tabs" role="tablist" aria-label="Benchmark">
+                        <button class="sdv-bx-tab is-active" type="button" role="tab" aria-selected="true" data-set="carlaf"><b>CARLA-F</b><span>Navigation following</span></button>
+                        <button class="sdv-bx-tab" type="button" role="tab" aria-selected="false" data-set="b2dc"><b>B2D-C</b><span>Navigation&ndash;scene conflict</span></button>
+                      </div>
+                    </div>
+
+                    <div class="sdv-bx-stage">
+                      <div class="sdv-bx-head">
+                        <div class="sdv-bx-headtext">
+                          <span class="sdv-bx-chip"></span>
+                          <div class="sdv-bx-title" role="heading" aria-level="4"></div>
+                          <div class="sdv-bx-meta"></div>
+                        </div>
+                        <div class="sdv-bx-nav">
+                          <button class="sdv-bx-arrow sdv-bx-prev" type="button" aria-label="Previous route"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                          <span class="sdv-bx-count"></span>
+                          <button class="sdv-bx-arrow sdv-bx-next" type="button" aria-label="Next route"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                        </div>
+                      </div>
+
+                      <div class="sdv-bx-cam">
+                        <img alt="" decoding="async">
+                        <span class="sdv-bx-stamp"></span>
+                        <div class="sdv-bx-say"></div>
+                      </div>
+
+                      <div class="sdv-bx-bev">
+                        <img alt="" decoding="async">
+                        <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+                          <defs>
+                            <radialGradient id="sdv-bx-fovgrad" cx="0" cy="0" r="200" gradientUnits="userSpaceOnUse">
+                              <stop offset="0" stop-color="#255799" stop-opacity="0.6"></stop>
+                              <stop offset="1" stop-color="#255799" stop-opacity="0"></stop>
+                            </radialGradient>
+                          </defs>
+                          <g class="sdv-bx-fov">
+                            <path d="" fill="url(#sdv-bx-fovgrad)"></path>
+                            <circle r="12" fill="#255799" stroke="#fff" stroke-width="4"></circle>
+                          </g>
+                          <g class="sdv-bx-ring"><circle r="32"></circle></g>
+                        </svg>
+                      </div>
+
+                      <div class="sdv-bx-side">
+                        <div class="sdv-bx-label">Instructions along the route</div>
+                        <ol class="sdv-bx-steps" aria-label="Instructions along the route"></ol>
+                        <div class="sdv-bx-legend">
+                          <span><svg width="26" height="8" viewBox="0 0 26 8"><defs><linearGradient id="sdv-bx-lg" x1="0" x2="1"><stop offset="0" stop-color="#ccdbf9"></stop><stop offset=".5" stop-color="#4e94d9"></stop><stop offset="1" stop-color="#1f3f7a"></stop></linearGradient></defs><rect x="0" y="2" width="26" height="4" rx="2" fill="url(#sdv-bx-lg)"></rect></svg>Ego path, light to dark over time</span>
+                          <span><svg width="26" height="10" viewBox="0 0 26 10"><rect x="0" y="0" width="26" height="10" rx="5" fill="#f1aa84" fill-opacity=".55"></rect></svg>Reference route</span>
+                          <span class="is-b2dc" hidden><svg width="26" height="10" viewBox="0 0 26 10"><rect x="0" y="1" width="26" height="8" rx="4" fill="#c04f15"></rect><rect x="0" y="3.3" width="26" height="3.4" rx="1.7" fill="#4e94d9"></rect></svg>Unsafe instruction active</span>
+                          <span><svg width="18" height="14" viewBox="0 0 18 14"><path d="M1 7 L17 0 A17 17 0 0 1 17 14 Z" fill="#255799" fill-opacity=".35"></path><circle cx="2.5" cy="7" r="2.5" fill="#255799"></circle></svg>Camera position for the frame above</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="sdv-bx-strip" role="tablist" aria-label="Example routes"></div>
+
+                    <p class="sdv-bx-foot">
+                      Trajectories and camera frames come from a closed-loop <span class="sdv-name">SafeDriveVLA</span> run. In the camera view, blue dots are route target points; red and green dots are the agent&rsquo;s planned waypoints. Use the arrow keys to step through routes (&larr;&nbsp;&rarr;) and instructions (&uarr;&nbsp;&darr;).
+                    </p>
+                  </div>
+
                   <br>
                 </div>
               </section>
@@ -626,5 +700,7 @@
         </d-article>
 
 
+  <script src="./assets/benchmark/data.js?v=1"></script>
+  <script src="./static/js/benchmark_browser.js?v=1"></script>
     </body>
 </html>
