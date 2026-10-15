@@ -30,20 +30,6 @@ body {
   background-color: #f5d77e;
   color: #0c1b33;
 }
-.button-container a.button.is-disabled { cursor: default; }
-.button-container a.button.is-disabled:hover { background-color: #fffdf4; }
-.sdv-soon {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #255799;
-  background: #E9EEF5;
-  border-radius: 999px;
-  padding: 0.1rem 0.4rem;
-  margin-left: 0.35rem;
-  vertical-align: middle;
-}
 .header-content .button-container { margin: 1.1rem 0 0.2rem -6px; }
 /* style.css sets nowrap on header h2 below 768px, which clips the hero description on phones */
 @media (max-width: 768px) {
